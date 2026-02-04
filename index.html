@@ -10,112 +10,118 @@
             background: #020202; color: var(--color);
             font-family: 'Courier New', Courier, monospace;
             display: flex; justify-content: center; align-items: center;
-            min-height: 100vh; margin: 0; overflow-x: hidden; text-transform: uppercase;
-        }
-        /* Эффект шума */
-        body::before {
-            content: ""; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: repeating-linear-gradient(0deg, rgba(0,0,0,0.05), rgba(0,0,0,0.05) 1px, transparent 1px, transparent 2px);
-            pointer-events: none; z-index: 10;
+            min-height: 100vh; margin: 0; padding: 20px 0;
+            overflow-x: hidden; text-transform: uppercase;
         }
         .container {
-            border: 1px solid var(--color); padding: 40px 30px;
-            background: rgba(0, 0, 0, 0.98); width: 95%; max-width: 480px;
-            position: relative; box-shadow: 0 0 50px rgba(0, 255, 65, 0.05);
+            border: 1px solid var(--color); padding: 30px;
+            background: rgba(0, 0, 0, 0.98); width: 90%; max-width: 500px;
+            position: relative; box-shadow: 0 0 40px rgba(0, 255, 65, 0.05);
         }
-        .top-tag {
-            position: absolute; top: -12px; left: 20px;
-            background: #020202; padding: 0 10px; font-size: 0.7rem;
-            border: 1px solid var(--color); letter-spacing: 3px;
+        /* Мусорный код сверху и снизу */
+        .junk-code {
+            font-size: 0.55rem; color: var(--dim); line-height: 1.2;
+            margin-bottom: 20px; word-break: break-all; opacity: 0.6;
         }
         .title {
-            font-size: 2.8rem; font-weight: 900; letter-spacing: 12px;
-            margin: 20px 0 5px 0; text-align: center;
+            font-size: 2.5rem; font-weight: 900; letter-spacing: 10px;
+            margin: 10px 0; text-align: center; border-bottom: 1px solid var(--color);
         }
-        .subtitle {
-            font-size: 0.6rem; color: var(--dim); text-align: center;
-            margin-bottom: 30px; letter-spacing: 5px;
-        }
-        /* Длинная таблица */
+        h2 { font-size: 0.8rem; border-left: 3px solid var(--color); padding-left: 10px; margin: 25px 0 10px 0; }
+        
         .data-table {
-            width: 100%; border-collapse: collapse; font-size: 0.7rem;
-            margin: 20px 0; border-top: 1px double var(--dim);
+            width: 100%; border-collapse: collapse; font-size: 0.7rem; margin-bottom: 20px;
         }
-        .data-table td {
-            padding: 12px 5px; border-bottom: 1px solid rgba(0, 255, 65, 0.05);
-        }
-        .data-table td:nth-child(2) { text-align: right; color: #fff; }
+        .data-table td { padding: 6px 0; border-bottom: 1px solid rgba(0, 255, 65, 0.05); }
+        .data-table td:last-child { text-align: right; color: #fff; }
         .label { color: var(--dim); }
 
-        .links {
-            display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 30px;
-        }
+        .links { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 20px; }
         .links a {
             color: var(--color); text-decoration: none; border: 1px solid var(--color);
-            padding: 12px; text-align: center; font-size: 0.8rem; transition: 0.3s;
+            padding: 8px; text-align: center; font-size: 0.7rem; transition: 0.3s;
         }
-        .links a:hover { background: var(--color); color: #000; box-shadow: 0 0 20px var(--color); }
+        .links a:hover { background: var(--color); color: #000; }
 
         .scanline {
             width: 100%; height: 2px; background: rgba(0, 255, 65, 0.1);
-            position: absolute; top: 0; left: 0; animation: scan 4s linear infinite;
+            position: absolute; top: 0; left: 0; animation: scan 6s linear infinite;
         }
         @keyframes scan { 0% { top: 0; } 100% { top: 100%; } }
-        .blink { animation: b 1s step-end infinite; }
-        @keyframes b { 50% { opacity: 0; } }
     </style>
 </head>
 <body>
 
 <div class="container">
     <div class="scanline"></div>
-    <div class="top-tag">REMAKED_SECURE_V4</div>
+    
+    <div class="junk-code">
+        #include &lt;iostream&gt; // void* ptr = malloc(0xDEADBEEF);<br>
+        while(sys_active) { encrypt_layer(rand() % 256); }<br>
+        [DEBUG] KERNEL_PANIC_PREVENTED: 0x0041FF22<br>
+        &gt;&gt; STACK_DUMP: FF A2 11 00 23 B1 CC 99
+    </div>
 
     <div class="title">REMAKED</div>
-    <div class="subtitle">ESTABLISHED_2026 // NO_TRACE</div>
 
+    <h2>// ABOUT REMAKED</h2>
     <table class="data-table">
-        <tr><td class="label">NODE_ADDR:</td><td id="ip">FETCHING...</td></tr>
-        <tr><td class="label">GEO_LOC:</td><td id="loc">SEARCHING...</td></tr>
-        <tr><td class="label">ISP_PROVIDER:</td><td id="isp">IDENTIFYING...</td></tr>
-        <tr><td class="label">OS_KERNEL:</td><td>X86_64 // LNX</td></tr>
+        <tr><td class="label">OS_NAME:</td><td>REMAKED_DISTRO_v4</td></tr>
+        <tr><td class="label">KERNEL:</td><td>X86_64 // LNX_6.1.0</td></tr>
+        <tr><td class="label">STATUS:</td><td>STABLE // ENCRYPTED</td></tr>
         <tr><td class="label">UPTIME:</td><td>104:12:09:44</td></tr>
-        <tr><td class="label">TRAFFIC:</td><td>4.2 TB / AES-NI</td></tr>
-        <tr><td class="label">STATUS:</td><td>ENCRYPTED <span class="blink">●</span></td></tr>
-        <tr><td class="label">SYSTEM_ID:</td><td>#99X_REMAKED</td></tr>
+    </table>
+
+    <h2>// ABOUT YOU)</h2>
+    <table class="data-table">
+        <tr><td class="label">VISITOR_IP:</td><td id="ip">TRACKING...</td></tr>
+        <tr><td class="label">LOCATION:</td><td id="loc">LOCALIZING...</td></tr>
+        <tr><td class="label">PROVIDER:</td><td id="isp">SCANNING...</td></tr>
+        <tr><td class="label">LOCAL_TIME:</td><td id="time">00:00:00</td></tr>
+        <tr><td class="label">ACCESS:</td><td>DENIED_LEVEL_4</td></tr>
     </table>
 
     <div class="links">
         <a href="https://github.com/exv1z1">GITHUB</a>
         <a href="#">TELEGRAM</a>
         <a href="#">DISCORD</a>
-        <a href="#">RESOURCES</a>
+        <a href="#">SOURCE</a>
     </div>
 
-    <div style="font-size: 0.5rem; opacity: 0.2; margin-top: 30px; text-align: center;">
-        ROOT_SESSION_OPEN // TRACE_PURGED // 0x000000<br>
-        [!] DO NOT PROCEED WITHOUT AUTHORIZATION
+    <div class="junk-code" style="margin-top: 25px; opacity: 0.3;">
+        01110010 01100101 01101101 01100001 01101011 01100101 01100100<br>
+        sys.auth_token = "95dbf998-f00b-204e-9800-998ecf8427e";<br>
+        [LOG] SESSION_CLOSED_BY_REMOTE_HOST...<br>
+        [LOG] TRACE_PURGED_SUCCESSFULLY.
     </div>
 </div>
 
 <script>
-    // Получаем расширенные данные (IP + Город + Провайдер)
+    // Реальное время
+    function updateTime() {
+        const now = new Date();
+        document.getElementById('time').innerText = now.getHours().toString().padStart(2, '0') + ':' + 
+            now.getMinutes().toString().padStart(2, '0') + ':' + 
+            now.getSeconds().toString().padStart(2, '0');
+    }
+    setInterval(updateTime, 1000);
+    updateTime();
+
+    // Данные о человеке
     async function fetchBioData() {
         try {
             const res = await fetch('https://ipapi.co/json/');
             const data = await res.json();
             document.getElementById('ip').innerText = data.ip || '127.0.0.1';
             document.getElementById('loc').innerText = `${data.city || 'UNK'}, ${data.country_code || 'XX'}`;
-            document.getElementById('isp').innerText = data.org || 'HIDDEN_NETWORK';
+            document.getElementById('isp').innerText = data.org || 'HIDDEN_ISP';
         } catch (e) {
             document.getElementById('ip').innerText = 'ANONYMOUS';
-            document.getElementById('loc').innerText = 'SATELLITE';
-            document.getElementById('isp').innerText = 'UNKNOWN_ISP';
         }
     }
     fetchBioData();
 
-    // Защита от пастеров
+    // Защита
     document.addEventListener('contextmenu', e => e.preventDefault());
     document.onkeydown = e => {
         if (e.keyCode == 123 || (e.ctrlKey && e.shiftKey && (e.keyCode == 73 || e.keyCode == 74)) || (e.ctrlKey && e.keyCode == 85)) return false;
