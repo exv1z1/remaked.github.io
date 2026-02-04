@@ -5,137 +5,124 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>REMAKED // TERMINAL</title>
     <style>
-        :root { --color: #00ff41; --dim: #003b11; }
+        :root { --color: #00ff41; --dim: #003b11; --bg: #050505; }
         body {
-            background: #020202; color: var(--color);
+            background: var(--bg); color: var(--color);
             font-family: 'Courier New', Courier, monospace;
-            display: flex; justify-content: center; align-items: center;
-            min-height: 100vh; margin: 0; padding: 20px 0;
-            overflow-x: hidden; text-transform: uppercase;
+            display: flex; justify-content: center; padding: 20px; margin: 0;
+            text-transform: lowercase; /* Вайб r4pe.us — всё маленькими буквами */
         }
-        .container {
-            border: 1px solid var(--color); padding: 30px;
-            background: rgba(0, 0, 0, 0.98); width: 90%; max-width: 500px;
-            position: relative; box-shadow: 0 0 40px rgba(0, 255, 65, 0.05);
+        .terminal {
+            width: 100%; max-width: 500px;
+            border: 1px solid #1a1a1a; padding: 20px; background: #000;
+            box-shadow: 0 0 20px rgba(0,0,0,0.5);
         }
-        .junk-code {
-            font-size: 0.55rem; color: var(--dim); line-height: 1.2;
-            margin-bottom: 20px; word-break: break-all; opacity: 0.6;
-            font-style: italic;
-        }
-        .title {
-            font-size: 2.5rem; font-weight: 900; letter-spacing: 10px;
-            margin: 10px 0; text-align: center; border-bottom: 1px solid var(--color);
-            text-shadow: 0 0 10px rgba(0, 255, 65, 0.3);
-        }
-        h2 { font-size: 0.8rem; border-left: 3px solid var(--color); padding-left: 10px; margin: 25px 0 10px 0; letter-spacing: 2px; }
+        .header-info { display: flex; justify-content: space-between; font-size: 0.7rem; color: var(--dim); margin-bottom: 15px; }
         
-        .data-table {
-            width: 100%; border-collapse: collapse; font-size: 0.7rem; margin-bottom: 15px;
-        }
-        .data-table td { padding: 8px 0; border-bottom: 1px solid rgba(0, 255, 65, 0.05); }
+        /* ASCII ART */
+        .ascii { font-size: 8px; line-height: 8px; white-space: pre; margin-bottom: 20px; color: var(--color); font-weight: bold; }
+        
+        .command { color: #fff; margin: 15px 0 5px 0; font-size: 0.9rem; }
+        .command span { color: var(--color); }
+
+        .content-box { border: 1px solid #1a1a1a; padding: 15px; margin-top: 10px; background: rgba(255,255,255,0.02); }
+        
+        .data-table { width: 100%; border-collapse: collapse; font-size: 0.8rem; margin: 10px 0; }
+        .data-table td { padding: 4px 0; }
         .data-table td:last-child { text-align: right; color: #fff; }
-        .label { color: var(--dim); }
+        
+        .social-link { display: flex; align-items: center; gap: 10px; text-decoration: none; color: #fff; margin: 8px 0; font-size: 0.85rem; }
+        .social-link span { color: var(--color); font-size: 0.7rem; }
 
-        /* Кнопки соцсетей */
-        .links { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 25px 0; }
-        .links a {
-            color: var(--color); text-decoration: none; border: 1px solid var(--color);
-            padding: 10px; text-align: center; font-size: 0.75rem; transition: 0.3s;
-            background: rgba(0, 255, 65, 0.02);
-        }
-        .links a:hover { background: var(--color); color: #000; box-shadow: 0 0 15px var(--color); }
-
-        .scanline {
-            width: 100%; height: 2px; background: rgba(0, 255, 65, 0.1);
-            position: absolute; top: 0; left: 0; animation: scan 6s linear infinite;
-            pointer-events: none;
-        }
-        @keyframes scan { 0% { top: 0; } 100% { top: 100%; } }
+        .junk { font-size: 0.6rem; color: var(--dim); line-height: 1.2; margin: 20px 0; }
+        .blink { animation: b 1s step-end infinite; }
+        @keyframes b { 50% { opacity: 0; } }
     </style>
 </head>
 <body>
 
-<div class="container">
-    <div class="scanline"></div>
+<div class="terminal">
+    <div class="header-info">
+        <span id="clock">17:06:25</span>
+        <span>ID: 258</span>
+    </div>
+
+    <div class="ascii">
+██████╗ ███████╗███╗   ███╗ █████╗ ██╗  ██╗███████╗██████╗ 
+██╔══██╗██╔════╝████╗ ████║██╔══██╗██║ ██╔╝██╔════╝██╔══██╗
+██████╔╝█████╗  ██╔████╔██║███████║█████╔╝ █████╗  ██║  ██║
+██╔══██╗██╔════╝██║╚██╔╝██║██╔══██╗██╔═██╗ ██╔════╝██║  ██║
+██║  ██║███████╗██║ ╚═╝ ██║██║  ██║██║  ██╗███████╗██████╔╝
+╚═╝  ╚═╝╚══════╝╚═╝     ╚═╝╚═╝  ╚═╝╚═╝  ╚═╝╚══════╝╚═════╝ 
+    </div>
+
+    <div class="junk">
+        [system_init] ... loading v4.0.1<br>
+        [kernel] modules: crypto, stealth, bypass<br>
+        01110010 01100101 01101101 01100001 01101011 01100101 01100100
+    </div>
+
+    <div class="command"><span>root@remaked</span>:~$ cat about_remaked.txt</div>
+    <div class="content-box">
+        <table class="data-table">
+            <tr><td>status:</td><td>active</td></tr>
+            <tr><td>uptime:</td><td>104:12:09</td></tr>
+            <tr><td>access:</td><td>root</td></tr>
+        </table>
+    </div>
+
+    <div class="command"><span>root@remaked</span>:~$ ./socials.sh</div>
+    <div class="content-box">
+        <a href="https://github.com/exv1z1" class="social-link">@github <span>[online]</span></a>
+        <a href="#" class="social-link">@telegram <span>[online]</span></a>
+        <a href="#" class="social-link">@discord <span>[online]</span></a>
+    </div>
+
+    <div class="command"><span>root@remaked</span>:~$ activity --visitor</div>
+    <div class="content-box">
+        <table class="data-table">
+            <tr><td>visitor_ip:</td><td id="ip">fetching...</td></tr>
+            <tr><td>geo_loc:</td><td id="loc">searching...</td></tr>
+            <tr><td>isp:</td><td id="isp">scanning...</td></tr>
+        </table>
+        <div style="font-size: 0.7rem; color: var(--dim); margin-top: 10px;">
+            // we see you, guest_<span id="rand-id"></span>
+        </div>
+    </div>
+
+    <div class="junk" style="opacity: 0.3;">
+        &gt;&gt; trace_purged: true<br>
+        &gt;&gt; session_end: 0x000000<br>
+        &gt;&gt; memory_leak: false
+    </div>
     
-    <div class="junk-code">
-        [SYSTEM_BOOT] ... OK<br>
-        #define AUTH_KEY "0x95DBF998"<br>
-        void* overflow = alloca(sizeof(uint64_t) * 1024);<br>
-        iptables -A INPUT -p tcp --dport 80 -j ACCEPT<br>
-        // MOV EAX, [ESP+4] // INT 0x80
-    </div>
-
-    <div class="title">REMAKED</div>
-
-    <h2>// ABOUT REMAKED</h2>
-    <table class="data-table">
-        <tr><td class="label">OS_NAME:</td><td>REMAKED_CORE_v4</td></tr>
-        <tr><td class="label">STATUS:</td><td>ACTIVE // HIDDEN</td></tr>
-        <tr><td class="label">UPTIME:</td><td>104:12:09:44</td></tr>
-        <tr><td class="label">VERSION:</td><td>STABLE_BUILD_2026</td></tr>
-    </table>
-
-    <div class="links">
-        <a href="https://github.com/exv1z1" target="_blank">GITHUB</a>
-        <a href="#" target="_blank">TELEGRAM</a>
-        <a href="#" target="_blank">DISCORD</a>
-        <a href="#" target="_blank">DONATE</a>
-    </div>
-
-    <h2>// ABOUT YOU)</h2>
-    <table class="data-table">
-        <tr><td class="label">VISITOR_IP:</td><td id="ip">FETCHING...</td></tr>
-        <tr><td class="label">LOCATION:</td><td id="loc">LOCALIZING...</td></tr>
-        <tr><td class="label">PROVIDER:</td><td id="isp">SCANNING...</td></tr>
-        <tr><td class="label">LOCAL_TIME:</td><td id="time">00:00:00</td></tr>
-        <tr><td class="label">AUTH_LVL:</td><td>GUEST_UNTRUSTED</td></tr>
-    </table>
-
-    <div class="junk-code" style="margin-top: 25px; opacity: 0.4;">
-        01110010 01100101 01101101 01100001 01101011 01100101 01100100<br>
-        [LOG] Incoming connection from node_id: <span id="node-id"></span><br>
-        [LOG] Attempting trace-back... FAILED<br>
-        [WARN] Unencrypted session detected.
-    </div>
+    <div class="command"><span>root@remaked</span>:~$ <span class="blink">_</span></div>
 </div>
 
 <script>
-    // Генерация случайного ID сессии для "мусора"
-    document.getElementById('node-id').innerText = Math.random().toString(16).substr(2, 8).toUpperCase();
-
-    // Реальное время
-    function updateTime() {
-        const now = new Date();
-        document.getElementById('time').innerText = now.getHours().toString().padStart(2, '0') + ':' + 
-            now.getMinutes().toString().padStart(2, '0') + ':' + 
-            now.getSeconds().toString().padStart(2, '0');
+    // Время и случайный ID
+    function update() {
+        const n = new Date();
+        document.getElementById('clock').innerText = n.toLocaleTimeString();
     }
-    setInterval(updateTime, 1000);
-    updateTime();
+    setInterval(update, 1000);
+    update();
+    document.getElementById('rand-id').innerText = Math.floor(Math.random() * 9999);
 
-    // Данные о человеке
-    async function fetchBioData() {
+    // Данные посетителя
+    async function getInfo() {
         try {
-            const res = await fetch('https://ipapi.co/json/');
-            const data = await res.json();
-            document.getElementById('ip').innerText = data.ip || '127.0.0.1';
-            document.getElementById('loc').innerText = `${data.city || 'UNKNOWN'}, ${data.country_code || 'XX'}`;
-            document.getElementById('isp').innerText = data.org || 'HIDDEN_NETWORK';
-        } catch (e) {
-            document.getElementById('ip').innerText = 'ANONYMOUS';
-            document.getElementById('loc').innerText = 'DEEP_WEB';
-            document.getElementById('isp').innerText = 'ENCRYPTED_ISP';
-        }
+            const r = await fetch('https://ipapi.co/json/');
+            const d = await r.json();
+            document.getElementById('ip').innerText = d.ip;
+            document.getElementById('loc').innerText = `${d.city}, ${d.country}`;
+            document.getElementById('isp').innerText = d.org;
+        } catch(e) { document.getElementById('ip').innerText = 'hidden'; }
     }
-    fetchBioData();
+    getInfo();
 
-    // Защита от копирования
+    // Защита
     document.addEventListener('contextmenu', e => e.preventDefault());
-    document.onkeydown = e => {
-        if (e.keyCode == 123 || (e.ctrlKey && e.shiftKey && (e.keyCode == 73 || e.keyCode == 74)) || (e.ctrlKey && e.keyCode == 85)) return false;
-    };
 </script>
 
 </body>
