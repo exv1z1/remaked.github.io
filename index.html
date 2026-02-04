@@ -6,7 +6,7 @@
     <title>REMAKED // TERMINAL</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        :root { --color: #00ff41; --dim: #003b11; --bg: #050505; --glitch: #ff003c; }
+        :root { --color: #00ff41; --dim: #005c1a; --bg: #050505; --glitch: #ff003c; }
         
         body {
             background: var(--bg); color: var(--color);
@@ -15,40 +15,32 @@
             text-transform: lowercase; overflow-x: hidden;
         }
 
-        /* Эффект Глитча при загрузке */
+        /* Глитч при загрузке */
         .glitch-overlay {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: #000; z-index: 9999; display: flex; align-items: center;
             justify-content: center; animation: fadeOut 0.5s 2.5s forwards;
             pointer-events: none;
         }
-        .glitch-text {
-            font-size: 2rem; font-weight: bold; color: var(--color);
-            animation: glitch 0.3s infinite;
-        }
+        .glitch-text { font-size: 1.5rem; font-weight: bold; color: var(--color); animation: glitch 0.3s infinite; }
 
         @keyframes glitch {
             0% { transform: translate(0); text-shadow: -2px 0 var(--glitch), 2px 0 #00fff9; }
-            25% { transform: translate(-2px, 2px); }
             50% { transform: translate(2px, -2px); text-shadow: 2px 0 var(--glitch), -2px 0 #00fff9; }
             100% { transform: translate(0); }
         }
         @keyframes fadeOut { to { opacity: 0; visibility: hidden; } }
 
-        .terminal { width: 100%; max-width: 500px; border: 1px solid #1a1a1a; padding: 20px; background: #000; position: relative; }
-        
-        /* Стили контента */
+        .terminal { width: 100%; max-width: 500px; border: 1px solid #1a1a1a; padding: 20px; background: #000; }
         .header-info { display: flex; justify-content: space-between; font-size: 0.7rem; color: var(--dim); margin-bottom: 15px; }
         .ascii { font-size: 8px; line-height: 8px; white-space: pre; margin-bottom: 20px; color: var(--color); font-weight: bold; }
         .command { color: #fff; margin: 20px 0 5px 0; font-size: 0.9rem; }
         .command span { color: var(--color); }
         .content-box { border: 1px solid #1a1a1a; padding: 15px; margin-top: 10px; background: rgba(255,255,255,0.02); }
-        .data-table { width: 100%; border-collapse: collapse; font-size: 0.8rem; }
-        .data-table td { padding: 4px 0; }
-        .data-table td:last-child { text-align: right; color: #fff; }
         
-        .social-link { display: flex; align-items: center; gap: 10px; text-decoration: none; color: #fff; margin: 8px 0; font-size: 0.85rem; }
-        .social-link:hover { color: var(--color); }
+        .social-link { display: flex; align-items: center; gap: 10px; text-decoration: none; color: #fff; margin: 10px 0; font-size: 0.9rem; transition: 0.2s; }
+        .social-link:hover { color: var(--color); transform: translateX(5px); }
+        .social-link i { width: 20px; color: var(--color); }
 
         .game-box { display: flex; gap: 40px; justify-content: center; margin-top: 5px; }
         .game-item { display: flex; flex-direction: column; align-items: center; gap: 8px; }
@@ -56,9 +48,9 @@
         .game-item:hover img { filter: grayscale(0) brightness(1) drop-shadow(0 0 8px var(--color)); }
         .game-item span { font-size: 0.65rem; color: var(--dim); }
 
-        /* Мусорный код */
+        /* Мусорный код (посветлее) */
         .junk-container { margin-top: 30px; border-top: 1px solid #1a1a1a; padding-top: 10px; }
-        .junk { font-size: 0.55rem; color: #002206; line-height: 1.1; word-break: break-all; margin-bottom: 5px; }
+        .junk { font-size: 0.6rem; color: var(--dim); line-height: 1.2; word-break: break-all; margin-bottom: 4px; }
         
         .blink { animation: b 1s step-end infinite; }
         @keyframes b { 50% { opacity: 0; } }
@@ -68,7 +60,7 @@
 <body>
 
 <div class="glitch-overlay">
-    <div class="glitch-text">REMAKED_v4.SYS_LOADING...</div>
+    <div class="glitch-text">REMAKED_SYSTEM_V4.04_BOOTING...</div>
 </div>
 
 <div class="terminal">
@@ -88,10 +80,9 @@
 
     <div class="command"><span>root@remaked</span>:~$ owner about.txt</div>
     <div class="content-box">
-        <table class="data-table">
-            <tr><td>owner:</td><td>remaked</td></tr>
-            <tr><td>status:</td><td>hidden</td></tr>
-            <tr><td>uptime:</td><td>104:12:09</td></tr>
+        <table style="width:100%; font-size:0.8rem;">
+            <tr><td>owner:</td><td style="text-align:right; color:#fff">remaked</td></tr>
+            <tr><td>status:</td><td style="text-align:right; color:#fff">hidden</td></tr>
         </table>
         <div class="quote">
             "i just love basketball and my computer, so leave me alone."
@@ -100,17 +91,20 @@
 
     <div class="command"><span>root@remaked</span>:~$ ./socials.sh</div>
     <div class="content-box">
-        <a href="https://t.me/proxedy" class="social-link"><i class="fab fa-telegram"></i> @telegram <span>[active]</span></a>
-        <a href="https://discord.com/users/hexatog" class="social-link"><i class="fab fa-discord"></i> @discord <span>[active]</span></a>
+        <a href="https://t.me/proxedy" target="_blank" class="social-link">
+            <i class="fab fa-telegram"></i> @proxedy <span>[online]</span>
+        </a>
+        <div class="social-link">
+            <i class="fab fa-discord"></i> @hexatog <span>[active]</span>
+        </div>
     </div>
 
     <div class="command"><span>root@remaked</span>:~$ scan --target=visitor</div>
     <div class="content-box" style="border-color: var(--dim);">
-        <table class="data-table">
-            <tr><td style="color:var(--dim)">ip_addr:</td><td id="ip">searching...</td></tr>
-            <tr><td style="color:var(--dim)">location:</td><td id="loc">...</td></tr>
-            <tr><td style="color:var(--dim)">battery:</td><td id="bat">...</td></tr>
-            <tr><td style="color:var(--dim)">platform:</td><td id="os">...</td></tr>
+        <table style="width:100%; font-size:0.8rem;">
+            <tr><td style="color:var(--dim)">ip:</td><td id="ip" style="text-align:right; color:#fff">searching...</td></tr>
+            <tr><td style="color:var(--dim)">loc:</td><td id="loc" style="text-align:right; color:#fff">...</td></tr>
+            <tr><td style="color:var(--dim)">bat:</td><td id="bat" style="text-align:right; color:#fff">...</td></tr>
         </table>
     </div>
 
@@ -129,41 +123,31 @@
     </div>
 
     <div class="junk-container">
-        <div class="junk">[system] kernel_init: ok (312ms)</div>
-        <div class="junk"># for i in {0..500}; do malloc(sizeof(int)*1024); done;</div>
-        <div class="junk">0x88 0x21 0xFF 0x44 0x22 0xAA 0xBB 0xCC 0xDD 0xEE 0xFF</div>
-        <div class="junk">iptables -I INPUT -s 0.0.0.0/0 -j DROP</div>
-        <div class="junk">TCP_NODELAY: true | SOCKET_REUSE: 0x1</div>
-        <div class="junk">DEBUG: user_session_encrypted: AES-256-GCM</div>
-        <div class="junk">LOG: incoming_relay_from_unknown_source</div>
-        <div class="junk">01101000 01100001 01100011 01101011 01100101 01100100</div>
-        <div class="junk"># ps aux | grep root | awk '{print $2}' | xargs kill -9</div>
-        <div class="junk">find / -name "*.paster" -exec rm -rf {} \;</div>
-        <div class="junk">loading_modules: stealth, spoof, basketball_engine, cs2_bypass</div>
+        <div class="junk">[system] memory_corrupted: false | secure_boot: enabled</div>
+        <div class="junk"># rm -rf /bin/paster /usr/local/trash</div>
         <div class="junk">0xAF 0xC1 0xD4 0xB2 0xE5 0xF9 0x01 0x22 0x33 0x44 0x55</div>
-        <div class="junk">shred -u -z /var/log/auth.log</div>
-        <div class="junk">MEM_DUMP: 77% complete... [waiting for user interaction]</div>
-        <div class="junk"># echo "remaked was here" > /etc/motd</div>
+        <div class="junk">DEBUG: connection_relayed via 127.0.0.1:9050 (Tor)</div>
+        <div class="junk"># iptables -A INPUT -p tcp --dport 80 -j ACCEPT</div>
+        <div class="junk">find / -type f -name "*.secret" -exec shred -u {} +</div>
+        <div class="junk">packet_loss: 0.002% | signal_strength: high</div>
+        <div class="junk">01101000 01100001 01100011 01101011 01100101 01100100</div>
+        <div class="junk">loading_modules: stealth, basketball_engine, cs2_bypass</div>
         <div class="junk">trace_id: <span id="trace">...</span></div>
         <div class="junk" style="margin-top:10px;">&gt;&gt; root@remaked:~$ <span class="blink">_</span></div>
     </div>
 </div>
 
 <script>
-    // Время и сессия
     setInterval(() => { document.getElementById('clock').innerText = new Date().toLocaleTimeString(); }, 1000);
     document.getElementById('sid').innerText = Math.random().toString(16).substr(2, 6).toUpperCase();
     document.getElementById('trace').innerText = Math.random().toString(36).substr(2, 12);
-    document.getElementById('os').innerText = navigator.platform.toLowerCase();
     
-    // Батарея
     if (navigator.getBattery) {
         navigator.getBattery().then(b => {
             document.getElementById('bat').innerText = `${Math.round(b.level * 100)}% ${b.charging ? '⚡' : ''}`;
         });
     }
 
-    // Поиск IP
     async function fetchInfo() {
         try {
             const res = await fetch('https://ipapi.co/json/');
@@ -173,32 +157,7 @@
         } catch (e) { document.getElementById('ip').innerText = 'protected'; }
     }
     fetchInfo();
-
-    // Запрет контекстного меню
     document.addEventListener('contextmenu', e => e.preventDefault());
-</script>
-
-</body>
-</html><script>
-    setInterval(() => { document.getElementById('clock').innerText = new Date().toLocaleTimeString(); }, 1000);
-    document.getElementById('sid').innerText = Math.random().toString(16).substr(2, 6).toUpperCase();
-    document.getElementById('os').innerText = navigator.platform.toLowerCase();
-    
-    if (navigator.getBattery) {
-        navigator.getBattery().then(b => {
-            document.getElementById('bat').innerText = `${Math.round(b.level * 100)}% ${b.charging ? '⚡' : ''}`;
-        });
-    }
-
-    async function fetchInfo() {
-        try {
-            const res = await fetch('https://ipapi.co/json/');
-            const d = await res.json();
-            document.getElementById('ip').innerText = d.ip || 'hidden';
-            document.getElementById('loc').innerText = d.city ? `${d.city}, ${d.country_code}`.toLowerCase() : 'unknown';
-        } catch (e) { document.getElementById('ip').innerText = 'protected'; }
-    }
-    fetchInfo();
 </script>
 
 </body>
