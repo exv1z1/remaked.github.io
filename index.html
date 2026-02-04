@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>REMAKED // TERMINAL</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root { --color: #00ff41; --dim: #003b11; --bg: #050505; }
         body {
@@ -24,12 +25,13 @@
         .social-link { display: flex; align-items: center; gap: 10px; text-decoration: none; color: #fff; margin: 8px 0; font-size: 0.85rem; }
         .social-link span { color: var(--color); font-size: 0.7rem; }
         
-        /* Иконки игр */
-        .game-box { display: flex; gap: 20px; align-items: center; margin-top: 5px; }
-        .game-item { display: flex; flex-direction: column; align-items: center; gap: 5px; filter: grayscale(1) brightness(0.5); transition: 0.3s; }
-        .game-item:hover { filter: grayscale(0) brightness(1); drop-shadow: 0 0 10px var(--color); }
-        .game-item img { width: 32px; height: 32px; }
-        .game-item span { font-size: 0.6rem; color: var(--dim); }
+        /* Исправленные иконки игр */
+        .game-box { display: flex; gap: 30px; align-items: center; margin-top: 5px; justify-content: center; }
+        .game-item { display: flex; flex-direction: column; align-items: center; gap: 8px; transition: 0.3s; color: var(--dim); }
+        .game-item i, .game-item img { font-size: 2rem; width: 32px; height: 32px; filter: grayscale(1); }
+        .game-item:hover { color: var(--color); transform: translateY(-3px); }
+        .game-item:hover i, .game-item:hover img { filter: grayscale(0) drop-shadow(0 0 8px var(--color)); }
+        .game-item span { font-size: 0.65rem; }
 
         .junk { font-size: 0.6rem; color: var(--dim); line-height: 1.2; margin: 20px 0; word-break: break-all; }
         .blink { animation: b 1s step-end infinite; }
@@ -66,24 +68,10 @@
         </div>
     </div>
 
-    <div class="command"><span>root@remaked</span>:~$ ls games/ --active</div>
-    <div class="content-box">
-        <div class="game-box">
-            <div class="game-item">
-                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/dot-net/dot-net-original.svg" style="filter: hue-rotate(150deg);" alt="dota2"> <img src="https://www.vectorlogo.zone/logos/dota2/dota2-icon.svg" width="30" alt="dota">
-                <span>dota 2</span>
-            </div>
-            <div class="game-item">
-                <img src="https://www.vectorlogo.zone/logos/counterstrike/counterstrike-icon.svg" width="30" alt="cs2">
-                <span>cs 2</span>
-            </div>
-        </div>
-    </div>
-
     <div class="command"><span>root@remaked</span>:~$ ./socials.sh</div>
     <div class="content-box">
-        <a href="#" class="social-link">@telegram <span>[active]</span></a>
-        <a href="#" class="social-link">@discord <span>[active]</span></a>
+        <a href="#" class="social-link"><i class="fab fa-telegram-plane"></i> @telegram <span>[active]</span></a>
+        <a href="#" class="social-link"><i class="fab fa-discord"></i> @discord <span>[active]</span></a>
     </div>
 
     <div class="command"><span>root@remaked</span>:~$ scan --target=visitor</div>
@@ -94,8 +82,19 @@
             <tr><td style="color:var(--dim)">battery:</td><td id="bat">...</td></tr>
             <tr><td style="color:var(--dim)">platform:</td><td id="os">...</td></tr>
         </table>
-        <div style="font-size: 0.65rem; color: #ff0000; margin-top: 10px; text-align: center;">
-            [!] we have your footprint, guest_<span id="uid"></span>
+    </div>
+
+    <div class="command"><span>root@remaked</span>:~$ ls games/ --installed</div>
+    <div class="content-box">
+        <div class="game-box">
+            <div class="game-item">
+                <img src="https://www.vectorlogo.zone/logos/dota2/dota2-icon.svg" alt="dota2">
+                <span>dota 2</span>
+            </div>
+            <div class="game-item">
+                <img src="https://www.vectorlogo.zone/logos/counterstrike/counterstrike-icon.svg" alt="cs2">
+                <span>cs 2</span>
+            </div>
         </div>
     </div>
 
@@ -103,7 +102,6 @@
         [system] remaked_core v4.0.1 initialized...<br>
         [logs] status: stable // security: high<br>
         01110010 01100101 01101101 01100001 01101011 01100101 01100100<br>
-        # find / -name "paster" -delete<br>
         &gt;&gt; root@remaked:~$ <span class="blink">_</span>
     </div>
 </div>
@@ -111,7 +109,6 @@
 <script>
     setInterval(() => { document.getElementById('clock').innerText = new Date().toLocaleTimeString(); }, 1000);
     document.getElementById('sid').innerText = Math.random().toString(16).substr(2, 6).toUpperCase();
-    document.getElementById('uid').innerText = Math.floor(Math.random() * 999);
     document.getElementById('os').innerText = navigator.platform.toLowerCase();
     
     if (navigator.getBattery) {
