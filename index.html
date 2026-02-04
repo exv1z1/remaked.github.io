@@ -5,36 +5,37 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>REMAKED // TERMINAL</title>
     <style>
-        :root { --color: #00ff41; --dim: #003b11; --bg: #050505; }
+        :root { --color: #00ff41; --dim: #003b11; --alert: #ff0000; }
         body {
-            background: var(--bg); color: var(--color);
+            background: #000; color: var(--color);
             font-family: 'Courier New', Courier, monospace;
             display: flex; justify-content: center; padding: 20px; margin: 0;
-            text-transform: lowercase; /* Вайб r4pe.us — всё маленькими буквами */
+            text-transform: lowercase;
         }
         .terminal {
             width: 100%; max-width: 500px;
             border: 1px solid #1a1a1a; padding: 20px; background: #000;
-            box-shadow: 0 0 20px rgba(0,0,0,0.5);
+            position: relative;
         }
-        .header-info { display: flex; justify-content: space-between; font-size: 0.7rem; color: var(--dim); margin-bottom: 15px; }
-        
-        /* ASCII ART */
+        /* Красная мигающая рамка при опасности */
+        .alert-border {
+            position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+            border: 1px solid var(--alert); opacity: 0;
+            animation: pulse 2s infinite; pointer-events: none;
+        }
+        @keyframes pulse { 0% { opacity: 0; } 50% { opacity: 0.3; } 100% { opacity: 0; } }
+
         .ascii { font-size: 8px; line-height: 8px; white-space: pre; margin-bottom: 20px; color: var(--color); font-weight: bold; }
-        
         .command { color: #fff; margin: 15px 0 5px 0; font-size: 0.9rem; }
         .command span { color: var(--color); }
-
-        .content-box { border: 1px solid #1a1a1a; padding: 15px; margin-top: 10px; background: rgba(255,255,255,0.02); }
+        .content-box { border: 1px solid #1a1a1a; padding: 15px; margin-top: 10px; background: rgba(255,0,0,0.02); }
         
-        .data-table { width: 100%; border-collapse: collapse; font-size: 0.8rem; margin: 10px 0; }
-        .data-table td { padding: 4px 0; }
+        .data-table { width: 100%; border-collapse: collapse; font-size: 0.8rem; }
+        .data-table td { padding: 5px 0; border-bottom: 1px solid rgba(255,255,255,0.05); }
         .data-table td:last-child { text-align: right; color: #fff; }
         
-        .social-link { display: flex; align-items: center; gap: 10px; text-decoration: none; color: #fff; margin: 8px 0; font-size: 0.85rem; }
-        .social-link span { color: var(--color); font-size: 0.7rem; }
-
-        .junk { font-size: 0.6rem; color: var(--dim); line-height: 1.2; margin: 20px 0; }
+        .warning { color: var(--alert); font-weight: bold; margin-top: 10px; font-size: 0.75rem; text-align: center; }
+        .junk { font-size: 0.6rem; color: var(--dim); line-height: 1.2; margin: 15px 0; }
         .blink { animation: b 1s step-end infinite; }
         @keyframes b { 50% { opacity: 0; } }
     </style>
@@ -42,11 +43,8 @@
 <body>
 
 <div class="terminal">
-    <div class="header-info">
-        <span id="clock">17:06:25</span>
-        <span>ID: 258</span>
-    </div>
-
+    <div class="alert-border"></div>
+    
     <div class="ascii">
 ██████╗ ███████╗███╗   ███╗ █████╗ ██╗  ██╗███████╗██████╗ 
 ██╔══██╗██╔════╝████╗ ████║██╔══██╗██║ ██╔╝██╔════╝██╔══██╗
@@ -57,69 +55,68 @@
     </div>
 
     <div class="junk">
-        [system_init] ... loading v4.0.1<br>
-        [kernel] modules: crypto, stealth, bypass<br>
-        01110010 01100101 01101101 01100001 01101011 01100101 01100100
+        [!] intruder_detected: true<br>
+        [!] extraction_mode: active<br>
+        &gt;&gt; scanning_local_files... Done
     </div>
 
-    <div class="command"><span>root@remaked</span>:~$ cat about_remaked.txt</div>
-    <div class="content-box">
+    <div class="command"><span>root@remaked</span>:~$ run spy_module.sh --target=you</div>
+    <div class="content-box" style="border-color: var(--alert);">
         <table class="data-table">
-            <tr><td>status:</td><td>active</td></tr>
-            <tr><td>uptime:</td><td>104:12:09</td></tr>
-            <tr><td>access:</td><td>root</td></tr>
+            <tr><td>your_ip:</td><td id="ip" style="color: var(--alert);">loading...</td></tr>
+            <tr><td>provider:</td><td id="isp">...</td></tr>
+            <tr><td>location:</td><td id="loc">...</td></tr>
+            <tr><td>device_os:</td><td id="os">...</td></tr>
+            <tr><td>browser:</td><td id="browser">...</td></tr>
+            <tr><td>screen_res:</td><td id="screen">...</td></tr>
+            <tr><td>battery:</td><td id="bat">checking...</td></tr>
         </table>
+        <div class="warning">!!! i see you, guest_<span id="uid"></span> !!!</div>
     </div>
 
-    <div class="command"><span>root@remaked</span>:~$ ./socials.sh</div>
+    <div class="command"><span>root@remaked</span>:~$ cat socials.txt</div>
     <div class="content-box">
-        <a href="https://github.com/exv1z1" class="social-link">@github <span>[online]</span></a>
-        <a href="#" class="social-link">@telegram <span>[online]</span></a>
-        <a href="#" class="social-link">@discord <span>[online]</span></a>
-    </div>
-
-    <div class="command"><span>root@remaked</span>:~$ activity --visitor</div>
-    <div class="content-box">
-        <table class="data-table">
-            <tr><td>visitor_ip:</td><td id="ip">fetching...</td></tr>
-            <tr><td>geo_loc:</td><td id="loc">searching...</td></tr>
-            <tr><td>isp:</td><td id="isp">scanning...</td></tr>
-        </table>
-        <div style="font-size: 0.7rem; color: var(--dim); margin-top: 10px;">
-            // we see you, guest_<span id="rand-id"></span>
+        <div style="display: flex; justify-content: space-around; font-size: 0.8rem;">
+            <a href="https://github.com/exv1z1" style="color:var(--color)">github</a>
+            <a href="#" style="color:var(--color)">telegram</a>
+            <a href="#" style="color:var(--color)">discord</a>
         </div>
     </div>
 
-    <div class="junk" style="opacity: 0.3;">
-        &gt;&gt; trace_purged: true<br>
-        &gt;&gt; session_end: 0x000000<br>
-        &gt;&gt; memory_leak: false
+    <div class="junk" style="opacity: 0.4;">
+        &gt;&gt; logs_uploaded_to_server...<br>
+        &gt;&gt; webcam_status: standby...<br>
+        &gt;&gt; tracking_packet_sent...
     </div>
-    
+
     <div class="command"><span>root@remaked</span>:~$ <span class="blink">_</span></div>
 </div>
 
 <script>
-    // Время и случайный ID
-    function update() {
-        const n = new Date();
-        document.getElementById('clock').innerText = n.toLocaleTimeString();
-    }
-    setInterval(update, 1000);
-    update();
-    document.getElementById('rand-id').innerText = Math.floor(Math.random() * 9999);
+    // Сбор "стремных" данных
+    document.getElementById('os').innerText = navigator.platform;
+    document.getElementById('browser').innerText = navigator.userAgent.split(') ')[1]?.split(' ')[0] || 'unknown';
+    document.getElementById('screen').innerText = `${window.screen.width}x${window.screen.height}`;
+    document.getElementById('uid').innerText = Math.floor(Math.random() * 9999);
 
-    // Данные посетителя
-    async function getInfo() {
+    // Данные по IP
+    async function getData() {
         try {
             const r = await fetch('https://ipapi.co/json/');
             const d = await r.json();
             document.getElementById('ip').innerText = d.ip;
-            document.getElementById('loc').innerText = `${d.city}, ${d.country}`;
             document.getElementById('isp').innerText = d.org;
-        } catch(e) { document.getElementById('ip').innerText = 'hidden'; }
+            document.getElementById('loc').innerText = `${d.city}, ${d.country_name}`;
+        } catch(e) { document.getElementById('ip').innerText = 'proxy_detected'; }
     }
-    getInfo();
+    getData();
+
+    // Заряд батареи (самый стремный момент)
+    if (navigator.getBattery) {
+        navigator.getBattery().then(function(battery) {
+            document.getElementById('bat').innerText = `${Math.round(battery.level * 100)}%`;
+        });
+    }
 
     // Защита
     document.addEventListener('contextmenu', e => e.preventDefault());
