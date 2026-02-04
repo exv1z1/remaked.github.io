@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>exv1z1 | System</title>
+    <style>
+        body {
+            background-color: #050505;
+            color: #00ff41;
+            font-family: 'Courier New', Courier, monospace;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            overflow: hidden; /* Чтобы не было полос прокрутки */
+        }
+
+        /* Эффект старого монитора */
+        body::before {
+            content: " ";
+            display: block;
+            position: absolute;
+            top: 0; left: 0; bottom: 0; right: 0;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), 
+                        linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+            z-index: 2;
+            background-size: 100% 2px, 3px 100%;
+            pointer-events: none;
+        }
+
+        .container {
+            border: 1px solid #00ff41;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.9);
+            width: 90%;
+            max-width: 500px;
+            position: relative;
+            z-index: 3;
+            box-shadow: 0 0 20px rgba(0, 255, 65, 0.1);
+        }
+
+        .header {
+            border-bottom: 1px solid #00ff41;
+            margin-bottom: 15px;
+            padding-bottom: 5px;
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.7rem;
+            opacity: 0.7;
+        }
+
+        h1 {
+            font-size: 1.4rem;
+            margin: 10px 0;
+            text-shadow: 0 0 5px #00ff41;
+        }
+
+        .sys-logs {
+            font-size: 0.65rem;
+            color: #008f11;
+            margin-bottom: 15px;
+            line-height: 1.2;
+        }
+
+        .main-info {
+            border-left: 2px solid #00ff41;
+            padding-left: 15px;
+            margin: 15px 0;
+        }
+
+        .links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .links a {
+            color: #00ff41;
+            text-decoration: none;
+            border: 1px solid #00ff41;
+            padding: 4px 8px;
+            font-size: 0.8rem;
+            transition: 0.3s;
+        }
+
+        .links a:hover {
+            background: #00ff41;
+            color: #000;
+        }
+
+        .blink { animation: blinker 1s linear infinite; }
+        @keyframes blinker { 50% { opacity: 0; } }
+
+        .glitch { font-size: 0.7rem; opacity: 0.4; margin-top: 10px; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="header">
+        <span>STATUS: ACTIVE</span>
+        <span>LOC: 127.0.0.1</span>
+    </div>
+
+    <div class="sys-logs">
+        [SYS] Initializing boot sequence...<br>
+        [SYS] Loading modules: crypto_v2, bypass_v1.0.4<br>
+        [SYS] Connection: SECURE_SOCKET_LAYER_ESTABLISHED<br>
+        [DBG] memory_dump: 0x004F3A -> cleared
+    </div>
+
+    <h1>exv1z1_<span class="blink">_</span></h1>
+
+    <div class="main-info">
+        <p>> User: root<br>
+           > Role: Digital Alchemist<br>
+           > Task: Building the void</p>
+    </div>
+
+    <div class="sys-logs">
+        void main() {<br>
+        &nbsp;&nbsp;while(true) {<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;think(); collect(); build();<br>
+        &nbsp;&nbsp;}<br>
+        }
+    </div>
+
+    <div class="links">
+        <a href="https://github.com/exv1z1">GITHUB</a>
+        <a href="#">TELEGRAM</a>
+        <a href="#">DISCORD</a>
+        <a href="#">SOURCE</a>
+    </div>
+
+    <div class="glitch">
+        ERR_CONNECTION_ENCRYPTED // SESSION_ID: 95dbf99
+    </div>
+</div>
+
+</body>
+</html>
