@@ -3,202 +3,118 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>REMAKED // SYSTEM</title>
+    <title>REMAKED // TERMINAL</title>
     <style>
-        :root {
-            --color: #00ff41;
-            --dim-color: #003b11;
-            --glitch-speed: 0.3s;
-        }
-
+        :root { --color: #00ff41; --dim: #003b11; }
         body {
-            background-color: #020202;
-            color: var(--color);
+            background: #020202; color: var(--color);
             font-family: 'Courier New', Courier, monospace;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            margin: 0;
-            overflow: hidden;
-            text-transform: uppercase;
+            display: flex; justify-content: center; align-items: center;
+            min-height: 100vh; margin: 0; overflow-x: hidden; text-transform: uppercase;
         }
-
-        /* Эффект старого кинескопа */
-        .scanline {
-            width: 100%;
-            height: 100px;
-            z-index: 10;
-            background: linear-gradient(0deg, rgba(0,0,0,0) 0%, rgba(0,255,65,0.05) 50%, rgba(0,0,0,0) 100%);
-            opacity: 0.1;
-            position: absolute;
-            bottom: 100%;
-            animation: scanline 6s linear infinite;
-            pointer-events: none;
+        /* Эффект шума */
+        body::before {
+            content: ""; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: repeating-linear-gradient(0deg, rgba(0,0,0,0.05), rgba(0,0,0,0.05) 1px, transparent 1px, transparent 2px);
+            pointer-events: none; z-index: 10;
         }
-
-        @keyframes scanline {
-            0% { bottom: 100%; }
-            100% { bottom: -100%; }
-        }
-
         .container {
-            border: 1px solid var(--color);
-            padding: 25px;
-            background: rgba(0, 0, 0, 0.95);
-            width: 90%;
-            max-width: 550px;
-            position: relative;
-            box-shadow: 0 0 30px rgba(0, 255, 65, 0.05);
+            border: 1px solid var(--color); padding: 40px 30px;
+            background: rgba(0, 0, 0, 0.98); width: 95%; max-width: 480px;
+            position: relative; box-shadow: 0 0 50px rgba(0, 255, 65, 0.05);
         }
-
-        .top-bar {
-            position: absolute;
-            top: -12px;
-            left: 10px;
-            background: #020202;
-            padding: 0 10px;
-            font-size: 0.65rem;
-            letter-spacing: 2px;
-            border: 1px solid var(--color);
+        .top-tag {
+            position: absolute; top: -12px; left: 20px;
+            background: #020202; padding: 0 10px; font-size: 0.7rem;
+            border: 1px solid var(--color); letter-spacing: 3px;
         }
-
-        .side-logs {
-            font-size: 0.55rem;
-            color: var(--dim-color);
-            position: absolute;
-            right: -120px;
-            top: 50%;
-            transform: rotate(90deg);
-            white-space: nowrap;
-            letter-spacing: 1px;
+        .title {
+            font-size: 2.8rem; font-weight: 900; letter-spacing: 12px;
+            margin: 20px 0 5px 0; text-align: center;
         }
-
-        .main-title {
-            font-size: 2.2rem;
-            margin: 20px 0 10px 0;
-            font-weight: 900;
-            letter-spacing: 8px;
-            position: relative;
-            display: inline-block;
-            text-shadow: 2px 2px var(--dim-color);
+        .subtitle {
+            font-size: 0.6rem; color: var(--dim); text-align: center;
+            margin-bottom: 30px; letter-spacing: 5px;
         }
-
-        .status-box {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            font-size: 0.7rem;
-            margin-bottom: 20px;
+        /* Длинная таблица */
+        .data-table {
+            width: 100%; border-collapse: collapse; font-size: 0.7rem;
+            margin: 20px 0; border-top: 1px double var(--dim);
         }
-
-        .online-dot {
-            width: 8px;
-            height: 8px;
-            background-color: var(--color);
-            border-radius: 50%;
-            box-shadow: 0 0 10px var(--color);
-            animation: blinker 1s step-end infinite;
+        .data-table td {
+            padding: 12px 5px; border-bottom: 1px solid rgba(0, 255, 65, 0.05);
         }
-
-        .stats-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 15px;
-            font-size: 0.7rem;
-            border-top: 1px solid var(--dim-color);
-            border-bottom: 1px solid var(--dim-color);
-            padding: 15px 0;
-            margin: 15px 0;
-        }
-
-        .bio-box {
-            border-left: 3px solid var(--color);
-            padding-left: 15px;
-            margin: 20px 0;
-            font-size: 0.85rem;
-            line-height: 1.5;
-        }
+        .data-table td:nth-child(2) { text-align: right; color: #fff; }
+        .label { color: var(--dim); }
 
         .links {
-            display: flex;
-            gap: 10px;
-            margin-top: 25px;
+            display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 30px;
         }
-
         .links a {
-            color: var(--color);
-            text-decoration: none;
-            border: 1px solid var(--color);
-            padding: 6px 18px;
-            font-size: 0.75rem;
-            transition: 0.2s;
-            background: transparent;
+            color: var(--color); text-decoration: none; border: 1px solid var(--color);
+            padding: 12px; text-align: center; font-size: 0.8rem; transition: 0.3s;
         }
+        .links a:hover { background: var(--color); color: #000; box-shadow: 0 0 20px var(--color); }
 
-        .links a:hover {
-            background: var(--color);
-            color: #000;
-            box-shadow: 0 0 15px var(--color);
-            font-weight: bold;
+        .scanline {
+            width: 100%; height: 2px; background: rgba(0, 255, 65, 0.1);
+            position: absolute; top: 0; left: 0; animation: scan 4s linear infinite;
         }
-
-        .footer-garbage {
-            font-size: 0.5rem;
-            opacity: 0.25;
-            margin-top: 25px;
-            word-break: break-all;
-            font-family: monospace;
-        }
-
-        @keyframes blinker { 50% { opacity: 0; } }
-
+        @keyframes scan { 0% { top: 0; } 100% { top: 100%; } }
+        .blink { animation: b 1s step-end infinite; }
+        @keyframes b { 50% { opacity: 0; } }
     </style>
 </head>
 <body>
 
-<div class="scanline"></div>
-
 <div class="container">
-    <div class="top-bar">ROOT@REMAKED:~#</div>
-    <div class="side-logs">SESSION: 0xDEADBEEF // MEM: 772MB // PID: 1042</div>
+    <div class="scanline"></div>
+    <div class="top-tag">REMAKED_SECURE_V4</div>
 
-    <div style="font-size: 0.6rem; color: var(--dim-color);">
-        [SYS] ATTEMPTING_REMOTE_LOGIN...<br>
-        [SYS] HANDSHAKE_SUCCESSFUL<br>
-        [SYS] DECRYPTING_IDENTITY_CORE...
-    </div>
+    <div class="title">REMAKED</div>
+    <div class="subtitle">ESTABLISHED_2026 // NO_TRACE</div>
 
-    <div class="main-title">REMAKED<span style="animation: blinker 1s step-end infinite;">_</span></div>
-    
-    <div class="status-box">
-        <div class="online-dot"></div>
-        <span>SYSTEM_STABLE</span>
-    </div>
-
-    <div class="bio-box">
-        > USER_ID: REMAKED<br>
-        > OBJECTIVE: REWRITE_EXISTENCE<br>
-        > TECH_STACK: [SECRET]
-    </div>
-
-    <div class="stats-grid">
-        <div>IP_ORIGIN: 0.0.0.0<br>UPLINK: ACTIVE<br>SESSIONS: 1</div>
-        <div>BIT_RATE: 12GB/S<br>ENCR: RSA-4096<br>LOGS: PURGED</div>
-    </div>
+    <table class="data-table">
+        <tr><td class="label">NODE_ADDR:</td><td id="ip">FETCHING...</td></tr>
+        <tr><td class="label">GEO_LOC:</td><td id="loc">SEARCHING...</td></tr>
+        <tr><td class="label">ISP_PROVIDER:</td><td id="isp">IDENTIFYING...</td></tr>
+        <tr><td class="label">OS_KERNEL:</td><td>X86_64 // LNX</td></tr>
+        <tr><td class="label">UPTIME:</td><td>104:12:09:44</td></tr>
+        <tr><td class="label">TRAFFIC:</td><td>4.2 TB / AES-NI</td></tr>
+        <tr><td class="label">STATUS:</td><td>ENCRYPTED <span class="blink">●</span></td></tr>
+        <tr><td class="label">SYSTEM_ID:</td><td>#99X_REMAKED</td></tr>
+    </table>
 
     <div class="links">
         <a href="https://github.com/exv1z1">GITHUB</a>
         <a href="#">TELEGRAM</a>
         <a href="#">DISCORD</a>
+        <a href="#">RESOURCES</a>
     </div>
 
-    <div class="footer-garbage">
-        44 4F 4E 54 20 43 4F 50 59 20 54 48 49 53 20 42 52 55 48 // 01110010 01100101 01101101 01100001 01101011 01100101 01100100 // NULL_PTR_EXCEPTION // TRACE_ID: 99x-11-z
+    <div style="font-size: 0.5rem; opacity: 0.2; margin-top: 30px; text-align: center;">
+        ROOT_SESSION_OPEN // TRACE_PURGED // 0x000000<br>
+        [!] DO NOT PROCEED WITHOUT AUTHORIZATION
     </div>
 </div>
 
 <script>
+    // Получаем расширенные данные (IP + Город + Провайдер)
+    async function fetchBioData() {
+        try {
+            const res = await fetch('https://ipapi.co/json/');
+            const data = await res.json();
+            document.getElementById('ip').innerText = data.ip || '127.0.0.1';
+            document.getElementById('loc').innerText = `${data.city || 'UNK'}, ${data.country_code || 'XX'}`;
+            document.getElementById('isp').innerText = data.org || 'HIDDEN_NETWORK';
+        } catch (e) {
+            document.getElementById('ip').innerText = 'ANONYMOUS';
+            document.getElementById('loc').innerText = 'SATELLITE';
+            document.getElementById('isp').innerText = 'UNKNOWN_ISP';
+        }
+    }
+    fetchBioData();
+
     // Защита от пастеров
     document.addEventListener('contextmenu', e => e.preventDefault());
     document.onkeydown = e => {
