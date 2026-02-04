@@ -6,7 +6,7 @@
     <title>REMAKED // TERMINAL</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        :root { --color: #00ff41; --dim: #005c1a; --bg: #050505; --glitch: #ff003c; }
+        :root { --color: #00ff41; --dim: #008f2d; --bg: #050505; --glitch: #ff003c; }
         
         body {
             background: var(--bg); color: var(--color);
@@ -15,25 +15,36 @@
             text-transform: lowercase; overflow-x: hidden;
         }
 
-        /* Глитч при загрузке */
+        /* Загрузочный глитч */
         .glitch-overlay {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: #000; z-index: 9999; display: flex; align-items: center;
-            justify-content: center; animation: fadeOut 0.5s 2.5s forwards;
+            justify-content: center; animation: fadeOut 0.5s 2.2s forwards;
             pointer-events: none;
         }
-        .glitch-text { font-size: 1.5rem; font-weight: bold; color: var(--color); animation: glitch 0.3s infinite; }
+        .glitch-text { font-size: 1.2rem; font-weight: bold; color: var(--color); animation: glitch 0.2s infinite; }
 
         @keyframes glitch {
             0% { transform: translate(0); text-shadow: -2px 0 var(--glitch), 2px 0 #00fff9; }
-            50% { transform: translate(2px, -2px); text-shadow: 2px 0 var(--glitch), -2px 0 #00fff9; }
+            50% { transform: translate(-1px, 1px); }
             100% { transform: translate(0); }
         }
         @keyframes fadeOut { to { opacity: 0; visibility: hidden; } }
 
         .terminal { width: 100%; max-width: 500px; border: 1px solid #1a1a1a; padding: 20px; background: #000; }
+
+        /* Баннер с котом */
+        .cat-banner {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+            border: 1px solid var(--dim);
+            margin-bottom: 20px;
+            filter: grayscale(0.5) contrast(1.2);
+        }
+
         .header-info { display: flex; justify-content: space-between; font-size: 0.7rem; color: var(--dim); margin-bottom: 15px; }
-        .ascii { font-size: 8px; line-height: 8px; white-space: pre; margin-bottom: 20px; color: var(--color); font-weight: bold; }
+        .ascii { font-size: 8px; line-height: 8px; white-space: pre; margin-bottom: 20px; color: var(--color); font-weight: bold; overflow-x: hidden; }
         .command { color: #fff; margin: 20px 0 5px 0; font-size: 0.9rem; }
         .command span { color: var(--color); }
         .content-box { border: 1px solid #1a1a1a; padding: 15px; margin-top: 10px; background: rgba(255,255,255,0.02); }
@@ -44,13 +55,13 @@
 
         .game-box { display: flex; gap: 40px; justify-content: center; margin-top: 5px; }
         .game-item { display: flex; flex-direction: column; align-items: center; gap: 8px; }
-        .game-item img { width: 35px; height: 35px; filter: grayscale(1) brightness(0.7); transition: 0.3s; object-fit: contain; }
-        .game-item:hover img { filter: grayscale(0) brightness(1) drop-shadow(0 0 8px var(--color)); }
+        .game-item img { width: 35px; height: 35px; filter: grayscale(1); transition: 0.3s; object-fit: contain; }
+        .game-item:hover img { filter: grayscale(0) drop-shadow(0 0 8px var(--color)); }
         .game-item span { font-size: 0.65rem; color: var(--dim); }
 
-        /* Мусорный код (посветлее) */
+        /* Мусорный код (светлее) */
         .junk-container { margin-top: 30px; border-top: 1px solid #1a1a1a; padding-top: 10px; }
-        .junk { font-size: 0.6rem; color: var(--dim); line-height: 1.2; word-break: break-all; margin-bottom: 4px; }
+        .junk { font-size: 0.65rem; color: var(--dim); line-height: 1.3; word-break: break-all; margin-bottom: 4px; opacity: 0.8; }
         
         .blink { animation: b 1s step-end infinite; }
         @keyframes b { 50% { opacity: 0; } }
@@ -64,6 +75,8 @@
 </div>
 
 <div class="terminal">
+    <img src="cat.png" class="cat-banner" alt="sys_banner">
+
     <div class="header-info">
         <span id="clock">00:00:00</span>
         <span>session: <span id="sid">...</span></span>
@@ -126,12 +139,9 @@
         <div class="junk">[system] memory_corrupted: false | secure_boot: enabled</div>
         <div class="junk"># rm -rf /bin/paster /usr/local/trash</div>
         <div class="junk">0xAF 0xC1 0xD4 0xB2 0xE5 0xF9 0x01 0x22 0x33 0x44 0x55</div>
-        <div class="junk">DEBUG: connection_relayed via 127.0.0.1:9050 (Tor)</div>
         <div class="junk"># iptables -A INPUT -p tcp --dport 80 -j ACCEPT</div>
         <div class="junk">find / -type f -name "*.secret" -exec shred -u {} +</div>
-        <div class="junk">packet_loss: 0.002% | signal_strength: high</div>
         <div class="junk">01101000 01100001 01100011 01101011 01100101 01100100</div>
-        <div class="junk">loading_modules: stealth, basketball_engine, cs2_bypass</div>
         <div class="junk">trace_id: <span id="trace">...</span></div>
         <div class="junk" style="margin-top:10px;">&gt;&gt; root@remaked:~$ <span class="blink">_</span></div>
     </div>
