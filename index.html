@@ -23,15 +23,20 @@
         .data-table td { padding: 4px 0; }
         .data-table td:last-child { text-align: right; color: #fff; }
         .social-link { display: flex; align-items: center; gap: 10px; text-decoration: none; color: #fff; margin: 8px 0; font-size: 0.85rem; }
-        .social-link i { color: var(--color); width: 20px; }
         
-        /* Иконки игр */
+        /* Стили для твоих PNG файлов */
         .game-box { display: flex; gap: 40px; justify-content: center; margin-top: 5px; }
-        .game-item { display: flex; flex-direction: column; align-items: center; gap: 8px; cursor: default; }
-        .game-item svg { width: 35px; height: 35px; fill: var(--dim); transition: 0.3s; }
-        .game-item:hover svg { fill: var(--color); filter: drop-shadow(0 0 8px var(--color)); }
+        .game-item { display: flex; flex-direction: column; align-items: center; gap: 8px; }
+        .game-item img { 
+            width: 35px; height: 35px; 
+            filter: grayscale(1) brightness(0.7); 
+            transition: 0.3s; 
+            object-fit: contain;
+        }
+        .game-item:hover img { 
+            filter: grayscale(0) brightness(1) drop-shadow(0 0 8px var(--color)); 
+        }
         .game-item span { font-size: 0.65rem; color: var(--dim); }
-        .game-item:hover span { color: var(--color); }
 
         .junk { font-size: 0.6rem; color: var(--dim); line-height: 1.2; margin: 20px 0; word-break: break-all; }
         .blink { animation: b 1s step-end infinite; }
@@ -88,11 +93,11 @@
     <div class="content-box">
         <div class="game-box">
             <div class="game-item">
-                <svg viewBox="0 0 24 24"><path d="M2 1l3 1.5V6l-3-1.5V1m17 0l3 1.5V6l-3-1.5V1M12 8l9 4.5V17l-9-4.5V8M12 8L3 12.5V17l9-4.5V8z"/></svg>
+                <img src="dota2.png" alt="dota2">
                 <span>dota 2</span>
             </div>
             <div class="game-item">
-                <svg viewBox="0 0 24 24"><path d="M12 2v4m0 12v4M2 12h4m12 0h4M12 7a5 5 0 100 10 5 5 0 000-10z"/></svg>
+                <img src="cs2.png" alt="cs2">
                 <span>cs 2</span>
             </div>
         </div>
@@ -100,7 +105,6 @@
 
     <div class="junk">
         [system] remaked_core v4.0.1 initialized...<br>
-        [logs] status: stable // security: high<br>
         &gt;&gt; root@remaked:~$ <span class="blink">_</span>
     </div>
 </div>
