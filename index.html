@@ -15,7 +15,7 @@
         }
         .terminal { width: 100%; max-width: 500px; border: 1px solid #1a1a1a; padding: 20px; background: #000; }
         .header-info { display: flex; justify-content: space-between; font-size: 0.7rem; color: var(--dim); margin-bottom: 15px; }
-        .ascii { font-size: 8px; line-height: 8px; white-space: pre; margin-bottom: 20px; color: var(--color); font-weight: bold; overflow-x: hidden; }
+        .ascii { font-size: 8px; line-height: 8px; white-space: pre; margin-bottom: 20px; color: var(--color); font-weight: bold; }
         .command { color: #fff; margin: 15px 0 5px 0; font-size: 0.9rem; }
         .command span { color: var(--color); }
         .content-box { border: 1px solid #1a1a1a; padding: 15px; margin-top: 10px; background: rgba(255,255,255,0.02); }
@@ -23,15 +23,15 @@
         .data-table td { padding: 4px 0; }
         .data-table td:last-child { text-align: right; color: #fff; }
         .social-link { display: flex; align-items: center; gap: 10px; text-decoration: none; color: #fff; margin: 8px 0; font-size: 0.85rem; }
-        .social-link span { color: var(--color); font-size: 0.7rem; }
+        .social-link i { color: var(--color); width: 20px; }
         
-        /* Исправленные иконки игр */
-        .game-box { display: flex; gap: 30px; align-items: center; margin-top: 5px; justify-content: center; }
-        .game-item { display: flex; flex-direction: column; align-items: center; gap: 8px; transition: 0.3s; color: var(--dim); }
-        .game-item i, .game-item img { font-size: 2rem; width: 32px; height: 32px; filter: grayscale(1); }
-        .game-item:hover { color: var(--color); transform: translateY(-3px); }
-        .game-item:hover i, .game-item:hover img { filter: grayscale(0) drop-shadow(0 0 8px var(--color)); }
-        .game-item span { font-size: 0.65rem; }
+        /* Иконки игр */
+        .game-box { display: flex; gap: 40px; justify-content: center; margin-top: 5px; }
+        .game-item { display: flex; flex-direction: column; align-items: center; gap: 8px; cursor: default; }
+        .game-item svg { width: 35px; height: 35px; fill: var(--dim); transition: 0.3s; }
+        .game-item:hover svg { fill: var(--color); filter: drop-shadow(0 0 8px var(--color)); }
+        .game-item span { font-size: 0.65rem; color: var(--dim); }
+        .game-item:hover span { color: var(--color); }
 
         .junk { font-size: 0.6rem; color: var(--dim); line-height: 1.2; margin: 20px 0; word-break: break-all; }
         .blink { animation: b 1s step-end infinite; }
@@ -70,7 +70,7 @@
 
     <div class="command"><span>root@remaked</span>:~$ ./socials.sh</div>
     <div class="content-box">
-        <a href="#" class="social-link"><i class="fab fa-telegram-plane"></i> @telegram <span>[active]</span></a>
+        <a href="#" class="social-link"><i class="fab fa-telegram"></i> @telegram <span>[active]</span></a>
         <a href="#" class="social-link"><i class="fab fa-discord"></i> @discord <span>[active]</span></a>
     </div>
 
@@ -88,11 +88,11 @@
     <div class="content-box">
         <div class="game-box">
             <div class="game-item">
-                <img src="https://www.vectorlogo.zone/logos/dota2/dota2-icon.svg" alt="dota2">
+                <svg viewBox="0 0 24 24"><path d="M2 1l3 1.5V6l-3-1.5V1m17 0l3 1.5V6l-3-1.5V1M12 8l9 4.5V17l-9-4.5V8M12 8L3 12.5V17l9-4.5V8z"/></svg>
                 <span>dota 2</span>
             </div>
             <div class="game-item">
-                <img src="https://www.vectorlogo.zone/logos/counterstrike/counterstrike-icon.svg" alt="cs2">
+                <svg viewBox="0 0 24 24"><path d="M12 2v4m0 12v4M2 12h4m12 0h4M12 7a5 5 0 100 10 5 5 0 000-10z"/></svg>
                 <span>cs 2</span>
             </div>
         </div>
@@ -101,7 +101,6 @@
     <div class="junk">
         [system] remaked_core v4.0.1 initialized...<br>
         [logs] status: stable // security: high<br>
-        01110010 01100101 01101101 01100001 01101011 01100101 01100100<br>
         &gt;&gt; root@remaked:~$ <span class="blink">_</span>
     </div>
 </div>
@@ -126,7 +125,6 @@
         } catch (e) { document.getElementById('ip').innerText = 'protected'; }
     }
     fetchInfo();
-    document.addEventListener('contextmenu', e => e.preventDefault());
 </script>
 
 </body>
