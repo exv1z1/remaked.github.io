@@ -3,142 +3,208 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>exv1z1 | System</title>
+    <title>REMAKED // SYSTEM</title>
     <style>
+        :root {
+            --color: #00ff41;
+            --dim-color: #003b11;
+            --glitch-speed: 0.3s;
+        }
+
         body {
-            background-color: #050505;
-            color: #00ff41;
+            background-color: #020202;
+            color: var(--color);
             font-family: 'Courier New', Courier, monospace;
             display: flex;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
             margin: 0;
-            overflow: hidden; /* Чтобы не было полос прокрутки */
+            overflow: hidden;
+            text-transform: uppercase;
         }
 
-        /* Эффект старого монитора */
-        body::before {
-            content: " ";
-            display: block;
+        /* Эффект старого кинескопа */
+        .scanline {
+            width: 100%;
+            height: 100px;
+            z-index: 10;
+            background: linear-gradient(0deg, rgba(0,0,0,0) 0%, rgba(0,255,65,0.05) 50%, rgba(0,0,0,0) 100%);
+            opacity: 0.1;
             position: absolute;
-            top: 0; left: 0; bottom: 0; right: 0;
-            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), 
-                        linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
-            z-index: 2;
-            background-size: 100% 2px, 3px 100%;
+            bottom: 100%;
+            animation: scanline 6s linear infinite;
             pointer-events: none;
         }
 
+        @keyframes scanline {
+            0% { bottom: 100%; }
+            100% { bottom: -100%; }
+        }
+
         .container {
-            border: 1px solid #00ff41;
-            padding: 20px;
-            background: rgba(0, 0, 0, 0.9);
+            border: 1px solid var(--color);
+            padding: 25px;
+            background: rgba(0, 0, 0, 0.95);
             width: 90%;
-            max-width: 500px;
+            max-width: 550px;
             position: relative;
-            z-index: 3;
-            box-shadow: 0 0 20px rgba(0, 255, 65, 0.1);
+            box-shadow: 0 0 30px rgba(0, 255, 65, 0.05);
         }
 
-        .header {
-            border-bottom: 1px solid #00ff41;
-            margin-bottom: 15px;
-            padding-bottom: 5px;
-            display: flex;
-            justify-content: space-between;
-            font-size: 0.7rem;
-            opacity: 0.7;
-        }
-
-        h1 {
-            font-size: 1.4rem;
-            margin: 10px 0;
-            text-shadow: 0 0 5px #00ff41;
-        }
-
-        .sys-logs {
+        .top-bar {
+            position: absolute;
+            top: -12px;
+            left: 10px;
+            background: #020202;
+            padding: 0 10px;
             font-size: 0.65rem;
-            color: #008f11;
-            margin-bottom: 15px;
-            line-height: 1.2;
+            letter-spacing: 2px;
+            border: 1px solid var(--color);
         }
 
-        .main-info {
-            border-left: 2px solid #00ff41;
-            padding-left: 15px;
+        .side-logs {
+            font-size: 0.55rem;
+            color: var(--dim-color);
+            position: absolute;
+            right: -120px;
+            top: 50%;
+            transform: rotate(90deg);
+            white-space: nowrap;
+            letter-spacing: 1px;
+        }
+
+        .main-title {
+            font-size: 2.2rem;
+            margin: 20px 0 10px 0;
+            font-weight: 900;
+            letter-spacing: 8px;
+            position: relative;
+            display: inline-block;
+            text-shadow: 2px 2px var(--dim-color);
+        }
+
+        .status-box {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.7rem;
+            margin-bottom: 20px;
+        }
+
+        .online-dot {
+            width: 8px;
+            height: 8px;
+            background-color: var(--color);
+            border-radius: 50%;
+            box-shadow: 0 0 10px var(--color);
+            animation: blinker 1s step-end infinite;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            font-size: 0.7rem;
+            border-top: 1px solid var(--dim-color);
+            border-bottom: 1px solid var(--dim-color);
+            padding: 15px 0;
             margin: 15px 0;
+        }
+
+        .bio-box {
+            border-left: 3px solid var(--color);
+            padding-left: 15px;
+            margin: 20px 0;
+            font-size: 0.85rem;
+            line-height: 1.5;
         }
 
         .links {
             display: flex;
-            flex-wrap: wrap;
             gap: 10px;
-            margin-top: 20px;
+            margin-top: 25px;
         }
 
         .links a {
-            color: #00ff41;
+            color: var(--color);
             text-decoration: none;
-            border: 1px solid #00ff41;
-            padding: 4px 8px;
-            font-size: 0.8rem;
-            transition: 0.3s;
+            border: 1px solid var(--color);
+            padding: 6px 18px;
+            font-size: 0.75rem;
+            transition: 0.2s;
+            background: transparent;
         }
 
         .links a:hover {
-            background: #00ff41;
+            background: var(--color);
             color: #000;
+            box-shadow: 0 0 15px var(--color);
+            font-weight: bold;
         }
 
-        .blink { animation: blinker 1s linear infinite; }
+        .footer-garbage {
+            font-size: 0.5rem;
+            opacity: 0.25;
+            margin-top: 25px;
+            word-break: break-all;
+            font-family: monospace;
+        }
+
         @keyframes blinker { 50% { opacity: 0; } }
 
-        .glitch { font-size: 0.7rem; opacity: 0.4; margin-top: 10px; }
     </style>
 </head>
 <body>
 
+<div class="scanline"></div>
+
 <div class="container">
-    <div class="header">
-        <span>STATUS: ACTIVE</span>
-        <span>LOC: 127.0.0.1</span>
+    <div class="top-bar">ROOT@REMAKED:~#</div>
+    <div class="side-logs">SESSION: 0xDEADBEEF // MEM: 772MB // PID: 1042</div>
+
+    <div style="font-size: 0.6rem; color: var(--dim-color);">
+        [SYS] ATTEMPTING_REMOTE_LOGIN...<br>
+        [SYS] HANDSHAKE_SUCCESSFUL<br>
+        [SYS] DECRYPTING_IDENTITY_CORE...
     </div>
 
-    <div class="sys-logs">
-        [SYS] Initializing boot sequence...<br>
-        [SYS] Loading modules: crypto_v2, bypass_v1.0.4<br>
-        [SYS] Connection: SECURE_SOCKET_LAYER_ESTABLISHED<br>
-        [DBG] memory_dump: 0x004F3A -> cleared
+    <div class="main-title">REMAKED<span style="animation: blinker 1s step-end infinite;">_</span></div>
+    
+    <div class="status-box">
+        <div class="online-dot"></div>
+        <span>SYSTEM_STABLE</span>
     </div>
 
-    <h1>exv1z1_<span class="blink">_</span></h1>
-
-    <div class="main-info">
-        <p>> User: root<br>
-           > Role: Digital Alchemist<br>
-           > Task: Building the void</p>
+    <div class="bio-box">
+        > USER_ID: REMAKED<br>
+        > OBJECTIVE: REWRITE_EXISTENCE<br>
+        > TECH_STACK: [SECRET]
     </div>
 
-    <div class="sys-logs">
-        void main() {<br>
-        &nbsp;&nbsp;while(true) {<br>
-        &nbsp;&nbsp;&nbsp;&nbsp;think(); collect(); build();<br>
-        &nbsp;&nbsp;}<br>
-        }
+    <div class="stats-grid">
+        <div>IP_ORIGIN: 0.0.0.0<br>UPLINK: ACTIVE<br>SESSIONS: 1</div>
+        <div>BIT_RATE: 12GB/S<br>ENCR: RSA-4096<br>LOGS: PURGED</div>
     </div>
 
     <div class="links">
         <a href="https://github.com/exv1z1">GITHUB</a>
         <a href="#">TELEGRAM</a>
         <a href="#">DISCORD</a>
-        <a href="#">SOURCE</a>
     </div>
 
-    <div class="glitch">
-        ERR_CONNECTION_ENCRYPTED // SESSION_ID: 95dbf99
+    <div class="footer-garbage">
+        44 4F 4E 54 20 43 4F 50 59 20 54 48 49 53 20 42 52 55 48 // 01110010 01100101 01101101 01100001 01101011 01100101 01100100 // NULL_PTR_EXCEPTION // TRACE_ID: 99x-11-z
     </div>
 </div>
+
+<script>
+    // Защита от пастеров
+    document.addEventListener('contextmenu', e => e.preventDefault());
+    document.onkeydown = e => {
+        if (e.keyCode == 123 || (e.ctrlKey && e.shiftKey && (e.keyCode == 73 || e.keyCode == 74)) || (e.ctrlKey && e.keyCode == 85)) return false;
+    };
+</script>
 
 </body>
 </html>
