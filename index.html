@@ -12,12 +12,9 @@
             display: flex; justify-content: center; padding: 20px; margin: 0;
             text-transform: lowercase;
         }
-        .terminal {
-            width: 100%; max-width: 500px;
-            border: 1px solid #1a1a1a; padding: 20px; background: #000;
-        }
+        .terminal { width: 100%; max-width: 500px; border: 1px solid #1a1a1a; padding: 20px; background: #000; }
         .header-info { display: flex; justify-content: space-between; font-size: 0.7rem; color: var(--dim); margin-bottom: 15px; }
-        .ascii { font-size: 8px; line-height: 8px; white-space: pre; margin-bottom: 20px; color: var(--color); font-weight: bold; }
+        .ascii { font-size: 8px; line-height: 8px; white-space: pre; margin-bottom: 20px; color: var(--color); font-weight: bold; overflow-x: hidden; }
         .command { color: #fff; margin: 15px 0 5px 0; font-size: 0.9rem; }
         .command span { color: var(--color); }
         .content-box { border: 1px solid #1a1a1a; padding: 15px; margin-top: 10px; background: rgba(255,255,255,0.02); }
@@ -26,10 +23,18 @@
         .data-table td:last-child { text-align: right; color: #fff; }
         .social-link { display: flex; align-items: center; gap: 10px; text-decoration: none; color: #fff; margin: 8px 0; font-size: 0.85rem; }
         .social-link span { color: var(--color); font-size: 0.7rem; }
+        
+        /* Иконки игр */
+        .game-box { display: flex; gap: 20px; align-items: center; margin-top: 5px; }
+        .game-item { display: flex; flex-direction: column; align-items: center; gap: 5px; filter: grayscale(1) brightness(0.5); transition: 0.3s; }
+        .game-item:hover { filter: grayscale(0) brightness(1); drop-shadow: 0 0 10px var(--color); }
+        .game-item img { width: 32px; height: 32px; }
+        .game-item span { font-size: 0.6rem; color: var(--dim); }
+
         .junk { font-size: 0.6rem; color: var(--dim); line-height: 1.2; margin: 20px 0; word-break: break-all; }
         .blink { animation: b 1s step-end infinite; }
         @keyframes b { 50% { opacity: 0; } }
-        .quote { font-style: italic; color: #888; font-size: 0.8rem; margin-top: 10px; border-left: 1px solid var(--dim); padding-left: 10px; }
+        .quote { font-style: italic; color: #666; font-size: 0.75rem; margin-top: 10px; border-left: 1px solid var(--dim); padding-left: 10px; }
     </style>
 </head>
 <body>
@@ -37,7 +42,7 @@
 <div class="terminal">
     <div class="header-info">
         <span id="clock">00:00:00</span>
-        <span>session_id: <span id="sid">...</span></span>
+        <span>session: <span id="sid">...</span></span>
     </div>
 
     <div class="ascii">
@@ -61,9 +66,22 @@
         </div>
     </div>
 
+    <div class="command"><span>root@remaked</span>:~$ ls games/ --active</div>
+    <div class="content-box">
+        <div class="game-box">
+            <div class="game-item">
+                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/dot-net/dot-net-original.svg" style="filter: hue-rotate(150deg);" alt="dota2"> <img src="https://www.vectorlogo.zone/logos/dota2/dota2-icon.svg" width="30" alt="dota">
+                <span>dota 2</span>
+            </div>
+            <div class="game-item">
+                <img src="https://www.vectorlogo.zone/logos/counterstrike/counterstrike-icon.svg" width="30" alt="cs2">
+                <span>cs 2</span>
+            </div>
+        </div>
+    </div>
+
     <div class="command"><span>root@remaked</span>:~$ ./socials.sh</div>
     <div class="content-box">
-        <a href="https://github.com/exv1z1" class="social-link">@github <span>[online]</span></a>
         <a href="#" class="social-link">@telegram <span>[active]</span></a>
         <a href="#" class="social-link">@discord <span>[active]</span></a>
     </div>
@@ -72,11 +90,9 @@
     <div class="content-box" style="border-color: var(--dim);">
         <table class="data-table">
             <tr><td style="color:var(--dim)">ip_addr:</td><td id="ip">searching...</td></tr>
-            <tr><td style="color:var(--dim)">provider:</td><td id="isp">...</td></tr>
             <tr><td style="color:var(--dim)">location:</td><td id="loc">...</td></tr>
             <tr><td style="color:var(--dim)">battery:</td><td id="bat">...</td></tr>
             <tr><td style="color:var(--dim)">platform:</td><td id="os">...</td></tr>
-            <tr><td style="color:var(--dim)">resolution:</td><td id="res">...</td></tr>
         </table>
         <div style="font-size: 0.65rem; color: #ff0000; margin-top: 10px; text-align: center;">
             [!] we have your footprint, guest_<span id="uid"></span>
@@ -88,12 +104,6 @@
         [logs] status: stable // security: high<br>
         01110010 01100101 01101101 01100001 01101011 01100101 01100100<br>
         # find / -name "paster" -delete<br>
-        # rm -rf /mental/health<br>
-        # bin/sh: 0x8821FF: access_denied<br>
-        # for i in {1..100}; do echo "stalking..."; done<br>
-        [debug] socket_opened: port 8080<br>
-        [debug] packet_received: 64 bytes from root<br>
-        &gt;&gt; trace_id: <span id="trace">...</span><br>
         &gt;&gt; root@remaked:~$ <span class="blink">_</span>
     </div>
 </div>
@@ -102,10 +112,7 @@
     setInterval(() => { document.getElementById('clock').innerText = new Date().toLocaleTimeString(); }, 1000);
     document.getElementById('sid').innerText = Math.random().toString(16).substr(2, 6).toUpperCase();
     document.getElementById('uid').innerText = Math.floor(Math.random() * 999);
-    document.getElementById('trace').innerText = Math.random().toString(36).substr(2, 10);
-
     document.getElementById('os').innerText = navigator.platform.toLowerCase();
-    document.getElementById('res').innerText = `${window.screen.width}x${window.screen.height}`;
     
     if (navigator.getBattery) {
         navigator.getBattery().then(b => {
@@ -116,18 +123,12 @@
     async function fetchInfo() {
         try {
             const res = await fetch('https://ipapi.co/json/');
-            const data = await res.json();
-            document.getElementById('ip').innerText = data.ip;
-            document.getElementById('isp').innerText = data.org.toLowerCase();
-            document.getElementById('loc').innerText = `${data.city}, ${data.country_code}`.toLowerCase();
-        } catch (e) {
-            document.getElementById('ip').innerText = 'hidden';
-            document.getElementById('loc').innerText = 'detected';
-            document.getElementById('isp').innerText = 'encrypted';
-        }
+            const d = await res.json();
+            document.getElementById('ip').innerText = d.ip || 'hidden';
+            document.getElementById('loc').innerText = d.city ? `${d.city}, ${d.country_code}`.toLowerCase() : 'unknown';
+        } catch (e) { document.getElementById('ip').innerText = 'protected'; }
     }
     fetchInfo();
-
     document.addEventListener('contextmenu', e => e.preventDefault());
 </script>
 
